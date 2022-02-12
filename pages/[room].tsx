@@ -112,7 +112,7 @@ export default function Game() {
   if (!name) {
     return (
       <div>
-        <h2>What's your name?</h2>
+        <h2>What&apos;s your name?</h2>
         <input
           placeholder="Name"
           value={tempName}
