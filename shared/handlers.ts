@@ -70,16 +70,14 @@ export const leave =
 
 export const switchPlayerStatus =
   (fakedb: FakeDB, socket: Socket, roomId: string) => () => {
-    if (!fakedb[roomId].isGameRunning) {
-      fakedb[roomId].players[socket.id].isPlaying =
-        !fakedb[roomId].players[socket.id].isPlaying;
+    fakedb[roomId].players[socket.id].isPlaying =
+      !fakedb[roomId].players[socket.id].isPlaying;
 
-      fakedb[roomId].io.emit("gameUpdated", {
-        isGameRunning: true,
-      });
+    fakedb[roomId].io.emit("gameUpdated", {
+      isGameRunning: true,
+    });
 
-      fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
-    }
+    fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
   };
 
 export const setAnswer =
@@ -138,12 +136,12 @@ export const restart =
     playersInGame.forEach((player) => {
       fakedb[roomId].players[player].answer = undefined;
       fakedb[roomId].players[player].voted = false;
-      fakedb[roomId].players[player].isPlaying = false;
+      fakedb[roomId].players[player].isPlaying = true;
     });
 
     fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
     fakedb[roomId].io.emit("gameUpdated", {
-      isGameRunning: false,
+      isGameRunning: true,
       areAnswersVisible: false,
       gameHasEnded: false,
     });

@@ -29,12 +29,10 @@ export default function Home() {
   };
 
   const handleSetName = (event) => {
-    console.log(event.currentTarget.value);
     setName(event.currentTarget.value);
   };
 
   const handleSetRoom = (event) => {
-    console.log(event.currentTarget.value);
     setRoom(event.currentTarget.value);
   };
 

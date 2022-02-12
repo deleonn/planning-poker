@@ -57,7 +57,9 @@ function Room({ roomId }: { roomId: string }) {
 
             return (
               <div className="player" key={playerId}>
-                <h2>{player.name}</h2>
+                <h2>
+                  {player.name} {player.isLeader ? "👑" : null}
+                </h2>
                 <Card
                   selectedAmount={answer}
                   amount={answer}
@@ -81,15 +83,19 @@ function Room({ roomId }: { roomId: string }) {
         <CardOptions
           onSelection={select}
           selectedAmount={selection}
-          disabled={!isGameRunning || areAnswersVisible}
+          disabled={
+            !isGameRunning || areAnswersVisible || (me && !me.isPlaying)
+          }
         />
-        {!areAnswersVisible && isGameRunning && me.isLeader ? (
+        {!areAnswersVisible && isGameRunning && me && me.isLeader ? (
           <Button onClick={reveal}>Reveal answers</Button>
         ) : Object.keys(players).length <= 1 ? (
           "Waiting for more players..."
         ) : null}
 
-        {areAnswersVisible && <Button onClick={restart}>Play again</Button>}
+        {areAnswersVisible && me && me.isLeader && (
+          <Button onClick={restart}>Play again</Button>
+        )}
       </div>
     </section>
   );
