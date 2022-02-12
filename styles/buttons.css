@@ -1,0 +1,15 @@
+.button {
+  text-transform: uppercase;
+  background-color: #8789C0;
+  border: none;
+  color: white;
+  padding: 1rem;
+  max-width: 200px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.button .disabled {
+  cursor: not-allowed;
+  background-color: #cecece;
+}

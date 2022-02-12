@@ -1,0 +1,48 @@
+.room-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-container > .header {
+  padding: 0 1rem;
+}
+
+.room-container > .board {
+  background-color: #cecece;
+  margin: 1rem 3rem;
+  padding: 2rem;
+
+  display: flex;
+}
+
+.room-container > .invite {
+  margin: 0 3rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-container > .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-container > .actions > .card-options {
+  margin-bottom: 1rem;
+}
+
+.room-container > .board > .player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.room-container > .board > .player > h2 {
+  font-size: 14px;
+}

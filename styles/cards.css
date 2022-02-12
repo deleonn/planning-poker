@@ -1,0 +1,49 @@
+.card-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  cursor: pointer;
+  width: 4rem;
+  height: 6rem;
+  border: 2px solid#8789C0;
+  color: #8789C0;
+  background:transparent;
+  margin: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card.disabled {
+  cursor: not-allowed;
+  background-color: #cecece;
+  color: white;
+  border-color: transparent;
+}
+
+.card > .card-content {
+  display: none;
+}
+
+.visible {
+  background: transparent;
+}
+
+.visible > .card-content {
+  display: block;
+}
+
+.selected {
+  background: #8789C0;
+  color: white;
+}
+
+.answered {
+  background: #8789C0;
+  color: white;
+}
