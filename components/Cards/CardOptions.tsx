@@ -20,7 +20,7 @@ const CardOptions: React.FC<CardOptionProps> = ({
   };
 
   return (
-    <div className="card-options">
+    <div className="card-options flex my-6">
       {options.map((option) => (
         <Card
           amount={option}

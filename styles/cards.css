@@ -1,4 +1,4 @@
-.card-options {
+/* .card-options {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,11 +28,11 @@
 
 .card > .card-content {
   display: none;
-}
+} */
 
-.visible {
+/* .visible {
   background: transparent;
-}
+} */
 
 .visible > .card-content {
   display: block;

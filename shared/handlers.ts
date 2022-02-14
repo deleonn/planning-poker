@@ -21,7 +21,8 @@ export const loadRoom = (io: Server, roomId: string) => {
     socket.on("switchPlayerStatus", switchPlayerStatus(fakedb, socket, roomId));
     socket.on("setAnswer", setAnswer(fakedb, socket, roomId));
     socket.on("revealAnswers", revealAnswers(fakedb, socket, roomId));
-    socket.on("restart", restart(fakedb, socket, roomId));
+    socket.on("restart", restart(fakedb, roomId));
+    socket.on("startGame", startGame(fakedb, roomId));
   });
 };
 
@@ -73,10 +74,6 @@ export const switchPlayerStatus =
     fakedb[roomId].players[socket.id].isPlaying =
       !fakedb[roomId].players[socket.id].isPlaying;
 
-    fakedb[roomId].io.emit("gameUpdated", {
-      isGameRunning: true,
-    });
-
     fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
   };
 
@@ -123,26 +120,32 @@ export const revealAnswers =
     }
   };
 
-export const restart =
-  (fakedb: FakeDB, socket: Socket, roomId: string) => () => {
-    fakedb[roomId].isGameRunning = false;
-    fakedb[roomId].areAnswersVisible = false;
-    fakedb[roomId].gameHasEnded = false;
+export const restart = (fakedb: FakeDB, roomId: string) => () => {
+  fakedb[roomId].isGameRunning = false;
+  fakedb[roomId].areAnswersVisible = false;
+  fakedb[roomId].gameHasEnded = false;
 
-    const playersInGame = Object.keys(fakedb[roomId].players).filter(
-      (playerId) => fakedb[roomId].players[playerId].isPlaying
-    );
+  const playersInGame = Object.keys(fakedb[roomId].players).filter(
+    (playerId) => fakedb[roomId].players[playerId].isPlaying
+  );
 
-    playersInGame.forEach((player) => {
-      fakedb[roomId].players[player].answer = undefined;
-      fakedb[roomId].players[player].voted = false;
-      fakedb[roomId].players[player].isPlaying = true;
-    });
+  playersInGame.forEach((player) => {
+    fakedb[roomId].players[player].answer = undefined;
+    fakedb[roomId].players[player].voted = false;
+    fakedb[roomId].players[player].isPlaying = true;
+  });
 
-    fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
-    fakedb[roomId].io.emit("gameUpdated", {
-      isGameRunning: true,
-      areAnswersVisible: false,
-      gameHasEnded: false,
-    });
-  };
+  fakedb[roomId].io.emit("playersUpdated", fakedb[roomId].players);
+  fakedb[roomId].io.emit("gameUpdated", {
+    isGameRunning: true,
+    areAnswersVisible: false,
+    gameHasEnded: false,
+  });
+};
+
+export const startGame = (fakedb: FakeDB, roomId: string) => () => {
+  fakedb[roomId].isGameRunning = true;
+  fakedb[roomId].io.emit("gameUpdated", {
+    isGameRunning: true,
+  });
+};
