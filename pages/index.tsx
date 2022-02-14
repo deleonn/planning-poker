@@ -14,7 +14,7 @@ export default function Home() {
     }
 
     push(`/${generate(10)}`);
-  }, []);
+  }, [name]);
 
   const joinRoom = () => {
     if (!name) {
