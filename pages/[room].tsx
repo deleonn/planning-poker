@@ -29,14 +29,12 @@ function Room({ roomId }: { roomId: string }) {
   }, [canvasRef, currentUrl]);
 
   const isAtLeastOnePlaying = () => {
-    console.log(players);
     return Object.entries(players)
       .map((el) => el[1])
       .some((el) => el.isPlaying === true);
   };
 
   const isAtLeastOneAnswer = () => {
-    console.log(players);
     return Object.entries(players)
       .map((el) => el[1])
       .some((el) => typeof el.answer === "number");
