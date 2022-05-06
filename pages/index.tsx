@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useName } from "../hooks";
 
 export default function Home() {
-  const [name, uid, setName] = useName();
+  const [name, _, setName] = useName();
   const [room, setRoom] = useState("");
   const { push } = useRouter();
 

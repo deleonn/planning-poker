@@ -21,13 +21,14 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       className={classNames(
-        "h-20 w-14 m-4 rounded flex justify-center items-center border-2 cursor-pointer text-white",
+        "h-20 w-14 m-4 rounded flex justify-center items-center border-2 cursor-pointer",
         {
           "bg-blue-500 text-white border-blue-500":
             selectedAmount === amount && selectedAmount !== undefined,
-          "bg-slate-700 text-slate-400 cursor-not-allowed border-slate-700":
+          "bg-slate-700 text-slate-400 cursor-not-allowed dark:border-slate-700 border-slate-700":
             disabled,
           "bg-blue-500 text-white": answered,
+          "border-blue-500 text-blue-500": !answered,
         }
       )}
       onClick={onSelection && !disabled ? () => onSelection(amount) : null}
